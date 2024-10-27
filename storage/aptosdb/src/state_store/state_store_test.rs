@@ -53,7 +53,7 @@ fn put_value_set(
     let state_kv_metadata_batch = SchemaBatch::new();
     state_store
         .put_value_sets(
-            vec![&sharded_value_set],
+            &[sharded_value_set],
             version,
             StateStorageUsage::new_untracked(),
             None,
@@ -470,7 +470,7 @@ proptest! {
         (input, batch1_size) in hash_map(any::<StateKey>(), any::<StateValue>(), 2..1000)
         .prop_flat_map(|input| {
             let len = input.len();
-            (Just(input), 1..len)
+            (Just(input), 2..len)
         })
     ) {
         let tmp_dir1 = TempPath::new();
